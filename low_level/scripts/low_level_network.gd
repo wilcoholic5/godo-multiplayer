@@ -24,7 +24,7 @@ var is_server: bool = false
 func _process(delta: float) -> void:
 	if connection == null:
 		return
-		
+	#print("listening for updates. is server = ", is_server)
 	handle_events()
 
 func handle_events() -> void:
@@ -50,12 +50,13 @@ func handle_events() -> void:
 					return
 			ENetConnection.EVENT_RECEIVE:
 				if is_server:
+					#print('skip')
 					on_server_packet.emit(peer.get_meta("id"), peer.get_packet())
 				else:
+					print('skip')
 					on_client_packet.emit(peer.get_packet())
 		packet_event = connection.service()
 		event_type = packet_event[0]
-		
 		
 func peer_connected(peer: ENetPacketPeer) -> void:
 	var peer_id: int = available_peer_ids.pop_back()

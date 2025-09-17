@@ -10,5 +10,4 @@ func spawn_player(id: int) -> void:
 	var player = LOW_LEVEL_NETWORK_PLAYER.instantiate()
 	player.owner_id = id
 	player.name = str(id)
-	
 	call_deferred("add_child", player)

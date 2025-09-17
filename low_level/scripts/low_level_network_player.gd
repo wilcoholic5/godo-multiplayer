@@ -34,26 +34,21 @@ func _physics_process(delta: float) -> void:
 func server_handle_player_position(peer_id: int, player_position: PlayerPosition) -> void:
 	if owner_id != peer_id:
 		return
-	#print('updating server position')
 	global_position = player_position.position
 	PlayerPosition.create(owner_id, global_position).broadcast(LowLevelNetwork.connection)
 
 func client_handle_player_position(player_position: PlayerPosition) -> void:
-	print(owner_id, player_position.id)
 	if is_authority || owner_id != player_position.id:
 		return
-	#print('updating server position')
 	global_position = player_position.position
 	
 func server_handle_player_rotation(peer_id: int, player_rotation: PlayerRotation) -> void:
 	if owner_id != peer_id:
 		return
-	#print('updating server position')
 	rotation_degrees = player_rotation.rotation
 	PlayerRotation.create(owner_id, rotation_degrees).broadcast(LowLevelNetwork.connection)
 
 func client_handle_player_rotation(player_rotation: PlayerRotation) -> void:
 	if is_authority || owner_id != player_rotation.id:
 		return
-	#print('updating server position')
 	rotation_degrees = player_rotation.rotation
