@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpi8pfcnwbv7h"]
+
+[ext_resource type="PackedScene" uid="uid://hiiixbdchiik" path="res://low_level/scenes/low_level.tscn" id="1_2j20d"]
+[ext_resource type="PackedScene" uid="uid://du0vkl4xq5o1q" path="res://low_level/scenes/low_level_player_spawn.tscn" id="2_ggxxq"]
+
+[node name="LowLevelExample" type="Node2D"]
+
+[node name="LowLevelUI" parent="." instance=ExtResource("1_2j20d")]
+
+[node name="LowLevelPlayerSpawn" parent="." instance=ExtResource("2_ggxxq")]

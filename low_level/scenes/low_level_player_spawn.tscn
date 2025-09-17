@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://du0vkl4xq5o1q"]
+
+[ext_resource type="Script" uid="uid://cb01jux3dub21" path="res://low_level/scripts/low_level_player_spawn.gd" id="1_24b8g"]
+
+[node name="LowLevelPlayerSpawn" type="Node"]
+script = ExtResource("1_24b8g")

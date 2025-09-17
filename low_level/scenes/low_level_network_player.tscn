@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds0fi1qymms48"]
+
+[ext_resource type="Script" uid="uid://ccphvka0igld0" path="res://low_level/scripts/low_level_network_player.gd" id="1_e2osb"]
+[ext_resource type="Texture2D" uid="uid://qh7ik1d88h0x" path="res://icon.svg" id="2_b8iyg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it0ph"]
+size = Vector2(131, 130)
+
+[node name="LowLevelNetworkPlayer" type="CharacterBody2D"]
+position = Vector2(-8, -13)
+script = ExtResource("1_e2osb")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_b8iyg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_it0ph")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -21.0
+offset_top = -93.0
+offset_right = 19.0
+offset_bottom = -65.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
