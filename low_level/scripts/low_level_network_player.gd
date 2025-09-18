@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED: float = 500
 
 var owner_id: int
+var previous_pos: Vector2
 var is_authority: bool:
 	get: return !LowLevelNetwork.is_server && owner_id == ClientNetworkGlobals.id
 
@@ -28,8 +29,10 @@ func _physics_process(delta: float) -> void:
 		PlayerRotation.create(owner_id, rotation_degrees).send(LowLevelNetwork.server_peer)
 	
 	move_and_slide()
-	if not velocity.is_zero_approx():
+	#if not velocity.is_zero_approx():
+	if global_position != previous_pos:
 		PlayerPosition.create(owner_id, global_position).send(LowLevelNetwork.server_peer)
+	previous_pos = global_position
 	
 func server_handle_player_position(peer_id: int, player_position: PlayerPosition) -> void:
 	if owner_id != peer_id:

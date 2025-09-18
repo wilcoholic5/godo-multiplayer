@@ -53,7 +53,6 @@ func handle_events() -> void:
 					#print('skip')
 					on_server_packet.emit(peer.get_meta("id"), peer.get_packet())
 				else:
-					print('skip')
 					on_client_packet.emit(peer.get_packet())
 		packet_event = connection.service()
 		event_type = packet_event[0]
