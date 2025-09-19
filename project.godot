@@ -22,6 +22,10 @@ LowLevelNetwork="*res://low_level/scripts/low_level_network.gd"
 ClientNetworkGlobals="*res://low_level/scripts/client_network_globals.gd"
 ServerNetworkGlobals="*res://low_level/scripts/server_network_globals.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [input]
 
 rotate={

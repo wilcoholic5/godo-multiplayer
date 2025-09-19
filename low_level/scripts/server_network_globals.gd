@@ -2,6 +2,7 @@ extends Node
 
 signal handle_player_position(peer_id: int, player_position: PlayerPosition)
 signal handle_player_rotation(peer_id: int, player_rotation: PlayerRotation)
+signal handle_player_transform(peer_id: int, player_transform: PlayerTransform)
 
 var peer_ids: Array[int]
 
@@ -20,6 +21,8 @@ func on_peer_disconnected(peer_id: int) -> void:
 func on_server_packet(peer_id: int, data: PackedByteArray) -> void:
 	var packet_type: int = data.decode_u8(0)
 	match packet_type:
+		PacketInfo.PACKET_TYPE.PLAYER_TRANSFORM:
+			handle_player_transform.emit(peer_id, PlayerTransform.create_from_data(data))
 		PacketInfo.PACKET_TYPE.PLAYER_POSITION:
 			handle_player_position.emit(peer_id, PlayerPosition.create_from_data(data))
 		PacketInfo.PACKET_TYPE.PLAYER_ROTATION:

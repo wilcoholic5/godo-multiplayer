@@ -3,8 +3,12 @@ class_name PacketInfo
 enum PACKET_TYPE {
 	ID_ASSIGNMENT = 0,
 	PLAYER_POSITION = 10,
-	PLAYER_ROTATION = 20
+	PLAYER_ROTATION = 20,
+	PLAYER_TRANSFORM = 30
 }
+
+const UNSIGNED_INT_BYTES = 1
+const FLOAT_SIZE_BYTES = 4
 
 var packet_type: PACKET_TYPE
 var flag: int
@@ -23,3 +27,15 @@ func send(target: ENetPacketPeer) -> void:
 	
 func broadcast(server: ENetConnection) -> void:
 	server.broadcast(0, encode(), flag)
+
+func add_float(data: PackedByteArray, value: float) -> PackedByteArray:
+	var size: int = data.size()
+	data.resize(data.size()+FLOAT_SIZE_BYTES)
+	data.encode_float(size, value)
+	return data
+	
+func add_id(data: PackedByteArray, id: int) -> PackedByteArray:
+	var size: int = data.size()
+	data.resize(size+UNSIGNED_INT_BYTES)
+	data.encode_u8(1, id)
+	return data

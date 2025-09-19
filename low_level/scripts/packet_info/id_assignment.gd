@@ -30,3 +30,4 @@ func decode(data: PackedByteArray) -> void:
 	id = data.decode_u8(1)
 	for i in range(2, data.size()):
 		remoted_ids.append(data.decode_u8(i))
+	print(remoted_ids)

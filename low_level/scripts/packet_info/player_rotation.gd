@@ -18,7 +18,7 @@ static func create_from_data(data: PackedByteArray) -> PlayerRotation:
 
 func encode() -> PackedByteArray:
 	var data: PackedByteArray = super.encode()
-	data.resize(10)
+	data.resize(6)
 	data.encode_u8(1, id)
 	data.encode_float(2, rotation)
 	return data
