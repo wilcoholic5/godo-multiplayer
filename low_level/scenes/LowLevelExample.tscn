@@ -8,3 +8,5 @@
 [node name="LowLevelUI" parent="." instance=ExtResource("1_2j20d")]
 
 [node name="LowLevelPlayerSpawn" parent="." instance=ExtResource("2_ggxxq")]
+
+[editable path="LowLevelUI"]
