@@ -2,8 +2,6 @@ extends Node
 
 signal handle_local_id_assignment(local_id: int)
 signal handle_remote_id_assignment(remote_id: int)
-signal handle_player_position(player_position: PlayerPosition)
-signal handle_player_rotation(player_position: PlayerRotation)
 signal handle_player_transform(player_transform: PlayerTransform)
 
 var id: int = -1
@@ -20,10 +18,6 @@ func on_client_packet(data: PackedByteArray) -> void:
 			manage_ids(IDAssignment.create_from_data(data))
 		PacketInfo.PACKET_TYPE.PLAYER_TRANSFORM:
 			handle_player_transform.emit(PlayerTransform.create_from_data(data))
-		PacketInfo.PACKET_TYPE.PLAYER_POSITION:
-			handle_player_position.emit(PlayerPosition.create_from_data(data))
-		PacketInfo.PACKET_TYPE.PLAYER_ROTATION:
-			handle_player_rotation.emit(PlayerRotation.create_from_data(data))
 		_:
 			push_error("FAILED: UNMATCHED PACKET TYPE")
 

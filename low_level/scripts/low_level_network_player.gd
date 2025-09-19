@@ -9,17 +9,11 @@ var is_authority: bool:
 var should_update_player_transform = false
 
 func _enter_tree() -> void:
-	#ServerNetworkGlobals.handle_player_position.connect(server_handle_player_position)
-	#ClientNetworkGlobals.handle_player_position.connect(client_handle_player_position)
-	#ServerNetworkGlobals.handle_player_rotation.connect(server_handle_player_rotation)
-	#ClientNetworkGlobals.handle_player_rotation.connect(client_handle_player_rotation)
 	ClientNetworkGlobals.handle_player_transform.connect(client_handle_player_transform)
 	ServerNetworkGlobals.handle_player_transform.connect(server_handle_player_transform)
 	$Label.text = str(owner_id)
 
 func _exit_tree() -> void:
-	#ServerNetworkGlobals.handle_player_position.disconnect(server_handle_player_position)
-	#ClientNetworkGlobals.handle_player_position.disconnect(client_handle_player_position)
 	ClientNetworkGlobals.handle_player_transform.disconnect(client_handle_player_transform)
 	ServerNetworkGlobals.handle_player_transform.disconnect(server_handle_player_transform)
 
@@ -42,28 +36,6 @@ func _physics_process(delta: float) -> void:
 	
 	previous_pos = global_position
 	should_update_player_transform = false
-	
-func server_handle_player_position(peer_id: int, player_position: PlayerPosition) -> void:
-	if owner_id != peer_id:
-		return
-	global_position = player_position.position
-	PlayerPosition.create(owner_id, global_position).broadcast(LowLevelNetwork.connection)
-
-func client_handle_player_position(player_position: PlayerPosition) -> void:
-	if is_authority || owner_id != player_position.id:
-		return
-	global_position = player_position.position
-	
-func server_handle_player_rotation(peer_id: int, player_rotation: PlayerRotation) -> void:
-	if owner_id != peer_id:
-		return
-	rotation_degrees = player_rotation.rotation
-	PlayerRotation.create(owner_id, rotation_degrees).broadcast(LowLevelNetwork.connection)
-
-func client_handle_player_rotation(player_rotation: PlayerRotation) -> void:
-	if is_authority || owner_id != player_rotation.id:
-		return
-	rotation_degrees = player_rotation.rotation
 	
 func server_handle_player_transform(peer_id: int, player_transform: PlayerTransform) -> void:
 	if owner_id != peer_id:
